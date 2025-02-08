@@ -14,7 +14,7 @@ import Link from "next/link";
 import {ModeToggle} from "@/components/ui/mode-toogle";
 const Navbar = () => {
     return (
-        <Card className="w-full bg-card py-3 px-4 border-0 flex items-center justify-between gap-6 rounded-2xl mt-5">
+        <Card className="w-full bg-card py-3 px-4 border-0 flex items-center justify-between gap-6 rounded-2xl ">
             <p>Helstorm-Track</p>
 
             <ul className="hidden md:flex items-center gap-10 text-card-foreground">
@@ -94,9 +94,11 @@ const Navbar = () => {
                                 <a href="#faqs">FAQs</a>
                             </DropdownMenuItem>
                             <DropdownMenuItem>
+                                <Link href="/login">
                                 <Button variant="secondary" className="w-full text-sm">
                                     Login
                                 </Button>
+                                </Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem>
                                 <Button className="w-full text-sm">Get Started</Button>
