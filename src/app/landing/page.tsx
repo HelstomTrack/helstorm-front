@@ -1,33 +1,33 @@
 "use client";
 import { Button } from "@/components/ui/button"
 import { CheckCircle } from "lucide-react"
-import {SubscriptionCards} from "@/components/SubscriptionCard/Subscription-cards";
 import CardsInfos from "@/components/CardsInfo/CardsInfos";
 import CardsCommentary from "@/components/CardsInfo/CardsCommentary";
-import Video from "@/components/VideoComponents/Video";
+import BackgroundImage from "@/components/ImageComponents/BackgroundImage";
+import SubscriptionCards from "@/components/SubscriptionCard/SubscriptionCards";
 
 
 export default function LandingPage() {
     return (
         <>
             <div>
-                <Video>
+                <BackgroundImage className="absolute top-0 left-0 w-full h-full object-cover" imgSrc={"/img-sport.jpg"}>
                     <section className="text-center py-20">
                         <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">Votre coach personnel de
                             poche</h1>
-                        <p className="text-xl text-muted-foreground mb-8">
+                        <p className="text-xl text-white mb-8">
                             Obtenez des programmes sportifs et alimentaires sur mesure, générés en fonction de vos
                             besoins
                             spécifiques.
                         </p>
-                        <Button size="lg" className="mr-4">
+                        <Button size="lg" className="mr-4 bg-gray-900">
                             Commencer gratuitement
                         </Button>
-                        <Button size="lg" variant="outline">
+                        <Button size="lg" variant="secondary">
                             Voir une démo
                         </Button>
                     </section>
-                </Video>
+                </BackgroundImage>
             </div>
             <div className="container mx-auto px-4 py-8">
                 <section className="py-16">
@@ -90,6 +90,7 @@ export default function LandingPage() {
                     <Button size="lg">S'inscrire gratuitement</Button>
                 </section>
             </div>
+
         </>
     )
 }

@@ -44,7 +44,7 @@ export function SubscriptionCards() {
     return (
         <div className="grid gap-8 md:grid-cols-3">
             {plans.map((plan, index) => (
-                <Card key={index} className={index === 1 ? "border-primary" : ""}>
+                <Card key={index} className={"transition-all duration-300 hover:scale-110"}>
                     <CardHeader>
                         <CardTitle>{plan.name}</CardTitle>
                         <CardDescription>{plan.description}</CardDescription>

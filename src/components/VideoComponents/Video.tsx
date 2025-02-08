@@ -7,7 +7,7 @@ interface VideoProps {
 export default function BackgroundVideo({ children }: VideoProps) {
     return (
         <div className="relative w-full">
-            <div className="relative w-full h-screen pt-16">
+            <div className="relative w-full h-screen ">
                 <video
                     autoPlay
                     loop

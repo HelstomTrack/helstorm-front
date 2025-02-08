@@ -1,163 +1,101 @@
-"use client";
+'use client'
 
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {Menu} from "lucide-react";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { nanoid } from "nanoid";
+import { useState } from 'react'
+import {Dialog, DialogPanel} from '@headlessui/react'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from "next/link";
-import {ModeToggle} from "@/components/ui/mode-toogle";
-const Navbar = () => {
+import {Button} from "../ui/button";
+
+const navigation = [
+    { name: 'Accueil', href: '/' },
+    { name: 'Fonctionnalités', href: '/test' },
+    { name: 'Comment ça marche ?', href: '#' },
+    { name: 'FAQ', href: '#' },
+    { name: 'Contact', href: '#' },
+]
+
+export default function Navbar() {
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
     return (
-        <Card className="w-full bg-card py-3 px-4 border-0 flex items-center justify-between gap-6 rounded-2xl ">
-            <p>Helstorm-Track</p>
-
-            <ul className="hidden md:flex items-center gap-10 text-card-foreground">
-                <li className="text-primary font-medium">
-                    <Link href="/" className="text-primary font-medium">
-                        Home
-                    </Link>
-                </li>
-                <li>
-                    <a href="#features">Features</a>
-                </li>
-                <li>
-                    <a href="#pricing">Pricing</a>
-                </li>
-                <li>
-                    <a href="#faqs">FAQs</a>
-                </li>
-                <li>
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <span className="cursor-pointer">Pages</span>
-                        </DropdownMenuTrigger>
-
-                        <DropdownMenuContent align="start">
-                            {landings.map((page) => (
-                                <DropdownMenuItem key={page.id}>
-                                    <Link href={page.route}>{page.title}</Link>
-                                </DropdownMenuItem>
+        <div className="bg-white">
+                <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8">
+                    <div className="flex lg:flex-1">
+                        <a href="#" className="-m-1.5 p-1.5">
+                            <span className="sr-only">Your Company</span>
+                            <img
+                                alt=""
+                                src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                                className="h-8 w-auto"
+                            />
+                        </a>
+                    </div>
+                    <div className="flex lg:hidden">
+                        <button
+                            type="button"
+                            onClick={() => setMobileMenuOpen(true)}
+                            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                        >
+                            <span className="sr-only">Open main menu</span>
+                            <Bars3Icon aria-hidden="true" className="size-6" />
+                        </button>
+                    </div>
+                    <div className="hidden lg:flex lg:gap-x-12">
+                        {navigation.map((item) => (
+                            <Link key={item.name} href={item.href} className="text-sm font-semibold text-gray-900 transition-all duration-300 hover:scale-110">
+                                {item.name}
+                            </Link>
                             ))}
-                        </DropdownMenuContent>
-                    </DropdownMenu>
-                </li>
-            </ul>
-
-            <div className="flex items-center">
-
-                <Link href="/login">
-                <Button variant="secondary" className="hidden md:block px-2">
-                    Login
-                </Button>
-                </Link>
-                <Button className="hidden md:block ml-2 mr-2">Get Started</Button>
-
-                <div className="flex md:hidden mr-2 items-center gap-2">
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <span className="py-2 px-2 bg-gray-100 rounded-md">Pages</span>
-                        </DropdownMenuTrigger>
-
-                        <DropdownMenuContent align="start">
-                            {landings.map((page) => (
-                                <DropdownMenuItem key={page.id}>
-                                    <Link href={page.route}>{page.title}</Link>
-                                </DropdownMenuItem>
-                            ))}
-                        </DropdownMenuContent>
-                    </DropdownMenu>
-
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="outline" size="icon">
-                                <Menu className="h-5 w-5 rotate-0 scale-100" />
-                            </Button>
-                        </DropdownMenuTrigger>
-
-                        <DropdownMenuContent align="end">
-                            <DropdownMenuItem>
-                                <a href="#home">Home</a>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <a href="#features">Features</a>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <a href="#pricing">Pricing</a>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <a href="#faqs">FAQs</a>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <Link href="/login">
-                                <Button variant="secondary" className="w-full text-sm">
-                                    Login
-                                </Button>
-                                </Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <Button className="w-full text-sm">Get Started</Button>
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
-                </div>
-                <ModeToggle />
-            </div>
-        </Card>
-    );
-};
-
-const landings = [
-    {
-        id: nanoid(),
-        title: "landing 01",
-        route: "/project-management",
-    },
-    {
-        id: nanoid(),
-        title: "landing 02",
-        route: "/crm-landing",
-    },
-    {
-        id: nanoid(),
-        title: "landing 03",
-        route: "/ai-content-landing",
-    },
-    {
-        id: nanoid(),
-        title: "landing 04",
-        route: "/new-intro-landing",
-    },
-    {
-        id: nanoid(),
-        title: "landing 05",
-        route: "/about-us-landing",
-    },
-    {
-        id: nanoid(),
-        title: "landing 06",
-        route: "/contact-us-landing",
-    },
-    {
-        id: nanoid(),
-        title: "landing 07",
-        route: "/faqs-landing",
-    },
-    {
-        id: nanoid(),
-        title: "landing 08",
-        route: "/pricing-landing",
-    },
-    {
-        id: nanoid(),
-        title: "landing 09",
-        route: "/career-landing",
-    },
-];
-
-export default Navbar;
+                    </div>
+                    <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+                        <Link href="/login">
+                            <Button variant="secondary" className="text-sm/6 font-semibold text-gray-900">Commencer maintenant</Button>
+                        </Link>
+                    </div>
+                </nav>
+                <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
+                    <div className="fixed inset-0 z-50" />
+                    <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                        <div className="flex items-center justify-between">
+                            <a href="#" className="-m-1.5 p-1.5">
+                                <span className="sr-only">Your Company</span>
+                                <img
+                                    alt=""
+                                    src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                                    className="h-8 w-auto"
+                                />
+                            </a>
+                            <button
+                                type="button"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                            >
+                                <span className="sr-only">Close menu</span>
+                                <XMarkIcon aria-hidden="true" className="size-6" />
+                            </button>
+                        </div>
+                        <div className="mt-6 flow-root">
+                            <div className="-my-6 divide-y divide-gray-500/10">
+                                <div className="space-y-2 py-6">
+                                    {navigation.map((item) => (
+                                        <a
+                                            key={item.name}
+                                            href={item.href}
+                                            className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                                        >
+                                            {item.name}
+                                        </a>
+                                    ))}
+                                </div>
+                                <div className="py-6">
+                                    <Link href="/login">
+                                        Login
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </DialogPanel>
+                </Dialog>
+        </div>
+    )
+}

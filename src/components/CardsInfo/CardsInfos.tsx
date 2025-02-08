@@ -7,7 +7,7 @@ interface CardsInfosProps {
 export default function  CardsInfos({title, description}: CardsInfosProps) {
     return (
         <div>
-            <Card>
+            <Card className="transition-all duration-300 hover:scale-110">
                 <CardHeader>
                     <CardTitle>{title}</CardTitle>
                 </CardHeader>
