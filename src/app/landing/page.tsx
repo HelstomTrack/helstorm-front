@@ -50,11 +50,11 @@ export default function LandingPage() {
 
                 <AnimatedSection>
                     <section className="py-16">
-                        <h2 className="text-3xl font-bold text-center mb-12">Comment ça marche ?</h2>
+                        <h2 className="mt-2 text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-6xl text-center mb-12">Comment ça marche ?</h2>
                         <div className="grid md:grid-cols-3 gap-8">
-                            <CardsInfos title="1. Définissez vos objectifs" description="Renseignez vos objectifs, votre niveau actuel et vos préférences."/>
-                            <CardsInfos title="2. Génération IA" description="Notre IA crée des programmes personnalisés en fonction de vos données."/>
-                            <CardsInfos title="3. Suivez vos progrès" description="Accédez à vos programmes et suivez votre évolution au fil du temps."/>
+                            <CardsInfos title="1. Remplis ton profil" description="Objectifs, morphologie, niveau sportif, habitudes alimentaires."/>
+                            <CardsInfos title="2. Reçois ton programme personnalisé" description="Entraînements et plans alimentaires générés automatiquement."/>
+                            <CardsInfos title="3. Applique et progresse" description="Suis tes performances et reçois des ajustements réguliers."/>
                         </div>
                     </section>
                 </AnimatedSection>

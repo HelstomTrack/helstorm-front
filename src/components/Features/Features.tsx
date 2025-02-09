@@ -1,24 +1,24 @@
-import { Brain, Cloud, Shield, Zap } from "lucide-react"
+import {Zap, Dumbbell, CookingPot, Watch} from "lucide-react"
 
 const features = [
     {
-        name: "AI-Powered Analytics",
-        description: "Harness the power of machine learning to derive actionable insights from your data.",
-        icon: Brain,
+        name: "Génération de programme sportif",
+        description: "Obtenez un programme sportif sur mesure, généré en fonction de vos besoins spécifiques.",
+        icon: Dumbbell,
     },
     {
-        name: "Cloud-Native Architecture",
-        description: "Scalable, resilient, and efficient solutions built for the modern cloud ecosystem.",
-        icon: Cloud,
+        name: "Génération de programme alimentaire",
+        description: "Obtenez un programme alimentaire sur mesure, généré en fonction de vos besoins spécifiques.",
+        icon: CookingPot,
     },
     {
-        name: "Enterprise-Grade Security",
-        description: "State-of-the-art security measures to protect your most valuable assets.",
-        icon: Shield,
+        name: "Suivi de votre progression",
+        description: "Accédez à vos programmes et suivez votre évolution au fil du temps.",
+        icon: Watch,
     },
     {
-        name: "High-Performance Systems",
-        description: "Optimized for speed and efficiency, our solutions deliver unparalleled performance.",
+        name: "Simple, rapide et efficace",
+        description: "En quelques clics, obtenez le programme parfait pour atteindre vos objectifs.",
         icon: Zap,
     },
 ]
@@ -27,9 +27,9 @@ export default function Features() {
     return (
         <section className="container space-y-16 py-24 md:py-32">
             <div className="mx-auto max-w-[58rem] text-center">
-                <h2 className="font-bold text-3xl leading-[1.1] sm:text-3xl md:text-5xl">Cutting-Edge Solutions</h2>
+                <h2 className="mt-2 text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-6xl">Helstorm solution</h2>
                 <p className="mt-4 text-muted-foreground sm:text-lg">
-                    Discover how Amane Soft can transform your business with our innovative technologies.
+                    Obtient un programme sportif et alimentaire sur mesure, générés en fonction de vos besoins spécifiques.
                 </p>
             </div>
             <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">

@@ -1,24 +1,20 @@
-import { useEffect, useState, ComponentType } from "react";
+import { useEffect, ComponentType } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
-// ✅ Définition d'un type pour le composant enfant
 const withAuth = <P extends object>(WrappedComponent: ComponentType<P>) => {
     return (props: P) => {
         const router = useRouter();
-        const [loading, setLoading] = useState(true);
+        const token = Cookies.get("token"); // ✅ Vérification du token avant affichage
 
         useEffect(() => {
-            const token = Cookies.get("token");
-
             if (!token) {
-                router.push("/login"); // ✅ Redirection si pas de token
-            } else {
-                setLoading(false);
+                router.replace("/login"); // ✅ Redirection immédiate sans délai
             }
-        }, [router]); // ✅ Ajout du router dans les dépendances pour éviter les re-renders inutiles
+        }, [router, token]);
 
-        if (loading) return <p>Chargement...</p>;
+        // ✅ Si le token est absent, éviter de rendre le composant
+        if (!token) return null;
 
         return <WrappedComponent {...props} />;
     };
