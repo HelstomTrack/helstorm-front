@@ -1,10 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button"
-import { CheckCircle } from "lucide-react"
 import CardsInfos from "@/components/CardsInfo/CardsInfos";
 import CardsCommentary from "@/components/CardsInfo/CardsCommentary";
 import BackgroundImage from "@/components/ImageComponents/BackgroundImage";
 import SubscriptionCards from "@/components/SubscriptionCard/SubscriptionCards";
+import AnimatedSection from "@/hooks/AnimatedSection";
+import Features from "@/components/Features/Features";
 
 
 export default function LandingPage() {
@@ -30,36 +31,11 @@ export default function LandingPage() {
                 </BackgroundImage>
             </div>
             <div className="container mx-auto px-4 py-8">
-                <section className="py-16">
-                    <h2 className="text-3xl font-bold text-center mb-12">Comment ça marche ?</h2>
-                    <div className="grid md:grid-cols-3 gap-8">
-                        <CardsInfos title="1. Définissez vos objectifs" description="Renseignez vos objectifs, votre niveau actuel et vos préférences."/>
-                        <CardsInfos title="2. Génération IA" description="Notre IA crée des programmes personnalisés en fonction de vos données."/>
-                        <CardsInfos title="3. Suivez vos progrès" description="Accédez à vos programmes et suivez votre évolution au fil du temps."/>
-                    </div>
-                </section>
+                <AnimatedSection>
+                    <Features/>
+                </AnimatedSection>
 
-                <section className="py-16 bg-muted rounded-lg">
-                    <div className="container mx-auto">
-                        <h2 className="text-3xl font-bold text-center mb-12">Fonctionnalités clés</h2>
-                        <div className="grid md:grid-cols-2 gap-8">
-                            {[
-                                "Programmes d'entraînement personnalisés",
-                                "Plans alimentaires adaptés à vos goûts",
-                                "Ajustement en temps réel selon vos progrès",
-                                "Conseils d'experts en nutrition et fitness",
-                                "Suivi de vos performances et statistiques",
-                                "Communauté de soutien et motivation",
-                            ].map((feature, index) => (
-                                <div key={index} className="flex items-center">
-                                    <CheckCircle className="text-primary mr-2"/>
-                                    <span>{feature}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
+                <AnimatedSection>
                 <section className="bg-primary text-primary-foreground rounded-lg p-8 my-16 text-center">
                     <h2 className="text-3xl font-bold mb-4">Prêt à transformer votre corps et votre santé ?</h2>
                     <p className="mb-6">
@@ -70,8 +46,24 @@ export default function LandingPage() {
                         Créer mon programme personnalisé
                     </Button>
                 </section>
+                </AnimatedSection>
 
-                <SubscriptionCards/>
+                <AnimatedSection>
+                    <section className="py-16">
+                        <h2 className="text-3xl font-bold text-center mb-12">Comment ça marche ?</h2>
+                        <div className="grid md:grid-cols-3 gap-8">
+                            <CardsInfos title="1. Définissez vos objectifs" description="Renseignez vos objectifs, votre niveau actuel et vos préférences."/>
+                            <CardsInfos title="2. Génération IA" description="Notre IA crée des programmes personnalisés en fonction de vos données."/>
+                            <CardsInfos title="3. Suivez vos progrès" description="Accédez à vos programmes et suivez votre évolution au fil du temps."/>
+                        </div>
+                    </section>
+                </AnimatedSection>
+
+                <AnimatedSection>
+                    <SubscriptionCards/>
+                </AnimatedSection>
+
+                <AnimatedSection>
                 <section className="py-16">
                     <h2 className="text-3xl font-bold text-center mb-12">Ce que disent nos utilisateurs</h2>
                     <div className="grid md:grid-cols-3 gap-8">
@@ -80,8 +72,9 @@ export default function LandingPage() {
                         <CardsCommentary name='Antoine.G' text="J'adore la variété des exercices et des recettes. Je ne m'ennuie jamais et je vois des résultats concrets."/>
                     </div>
                 </section>
+                </AnimatedSection>
 
-
+                <AnimatedSection>
                 <section className="text-center py-20">
                     <h2 className="text-3xl font-bold mb-6">Commencez votre transformation dès aujourd'hui</h2>
                     <p className="text-xl text-muted-foreground mb-8">
@@ -89,8 +82,8 @@ export default function LandingPage() {
                     </p>
                     <Button size="lg">S'inscrire gratuitement</Button>
                 </section>
+            </AnimatedSection>
             </div>
-
         </>
     )
 }

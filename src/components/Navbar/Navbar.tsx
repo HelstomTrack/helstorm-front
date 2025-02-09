@@ -49,7 +49,7 @@ export default function Navbar() {
                     </div>
                     <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                         <Link href="/login">
-                            <Button variant="secondary" className="text-sm/6 font-semibold text-gray-900">Commencer maintenant</Button>
+                            <Button variant="secondary" className="text-sm/6 font-semibold text-gray-900 transition-all duration-300 hover:scale-110">Commencer maintenant</Button>
                         </Link>
                     </div>
                 </nav>
