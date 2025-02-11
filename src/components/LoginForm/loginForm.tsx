@@ -7,7 +7,6 @@ import { z } from "zod";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -33,7 +32,6 @@ export function LoginForm() {
     const [errorMessage, setErrorMessage] = useState("");
     const router = useRouter();
 
-    // ✅ Fonction de soumission du formulaire
     const onSubmit = async (data: FormData) => {
         try {
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/login_check`, {
@@ -44,7 +42,7 @@ export function LoginForm() {
             const token = response.data.token;
             Cookies.set("token", token, { expires: 1 });
 
-            router.push("/success");
+            router.push("/dashboard");
         } catch (error) {
             setErrorMessage("Identifiants incorrects !");
         }
@@ -60,16 +58,14 @@ export function LoginForm() {
             </div>
 
             <div className="grid gap-6">
-                {/* Champ Username */}
                 <div className="grid gap-2">
                     <Label htmlFor="username">Username</Label>
-                    <Input id="username" type="text" {...register("username")} />
+                    <Input id="username" type="text" placeholder='john.doe@email.com' {...register("username")} />
                     {errors.username && (
                         <p className="text-red-500 text-sm">{errors.username.message}</p>
                     )}
                 </div>
 
-                {/* Champ Password */}
                 <div className="grid gap-2">
                     <Label htmlFor="password">Password</Label>
                     <Input id="password" type="password" {...register("password")} />
@@ -78,10 +74,8 @@ export function LoginForm() {
                     )}
                 </div>
 
-                {/* Message d'erreur backend */}
                 {errorMessage && <p className="text-red-500">{errorMessage}</p>}
 
-                {/* Bouton Submit */}
                 <Button type="submit" className="w-full">
                     Login
                 </Button>
