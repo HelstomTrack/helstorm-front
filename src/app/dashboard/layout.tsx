@@ -1,7 +1,13 @@
+"use client";
 import React from 'react';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import TopNav from "@/components/TopNav/TopNav";
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+import withAuth from "@/utils/withAuth";
+
+interface DashboardLayoutProps {
+    children: React.ReactNode;
+}
+const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     return (
         <div className="flex h-screen" >
             <Sidebar />
@@ -14,3 +20,4 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </div>
     );
 }
+export default DashboardLayout;

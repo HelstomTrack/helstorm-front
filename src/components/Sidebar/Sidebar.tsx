@@ -92,14 +92,14 @@ export default function Sidebar() {
                                     <NavItem href="/dashboard" icon={Home}>
                                         Dashboard
                                     </NavItem>
-                                    <NavItem href="#" icon={BarChart2}>
-                                        Analytics
+                                    <NavItem href="" icon={BarChart2}>
+                                        Programme alimentaire
                                     </NavItem>
-                                    <NavItem href="#" icon={Building2}>
-                                        Organization
+                                    <NavItem href="/dashboard/plan" icon={Building2}>
+                                        Programme sportif
                                     </NavItem>
-                                    <NavItem href="#" icon={Folder}>
-                                        Projects
+                                    <NavItem href="/dashboard/chat" icon={Folder}>
+                                        chatbot
                                     </NavItem>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@ export default function Sidebar() {
                                     Finance
                                 </div>
                                 <div className="space-y-1">
-                                    <NavItem href="/dashboard/plan" icon={Wallet}>
+                                    <NavItem href="" icon={Wallet}>
                                         Transactions
                                     </NavItem>
                                     <NavItem href="#" icon={Receipt}>

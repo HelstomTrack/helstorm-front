@@ -9,29 +9,15 @@ export const programApi = {
         const response = await fetch(`${API_BASE_URL}//${id}`);
         return response.json();
     },
-    async createProgram(program) {
-        const response = await fetch(`${API_BASE_URL}/program`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(program),
-        });
-        return response.json();
-    },
-    async updateProgram(program) {
-        const response = await fetch(`${API_BASE_URL}/program/${program.id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(program),
-        });
-        return response.json();
-    },
-    async deleteProgram(id) {
-        await fetch(`${API_BASE_URL}/program/${id}`, {
-            method: 'DELETE',
-        });
-    },
 };
+
+export const planApi = {
+    async getPlans() {
+        const response = await fetch(`${API_BASE_URL}/plan`);
+        return response.json();
+    },
+    async getPlanById(id) {
+        const response = await fetch(`${API_BASE_URL}/program/user/${id}`);
+        return response.json();
+    },
+}

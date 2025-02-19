@@ -1,15 +1,16 @@
 "use client";
 
 import useSWR from "swr";
-import { programApi } from "@/utils/api";
-import {Program} from "@/utils/types";
+import {planApi, programApi} from "@/utils/api";
+import {Program, Plan} from "@/utils/types";
 
-const fetcher = async () => await programApi.getPrograms();
+const fetcher = async () => await planApi.getPlanById(1);
 
 export default function Test() {
     const { data: programs, error } = useSWR("programs", fetcher, {
         suspense: true,
     });
+    console.log(programs);
 
     if (error) return <p>Erreur lors du chargement des données.</p>;
     if (!programs) return <p>Chargement...</p>;

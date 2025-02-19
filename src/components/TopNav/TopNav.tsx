@@ -1,9 +1,13 @@
 "use client"
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Bell, ChevronRight } from "lucide-react"
+import {Bell, ChevronRight, UserIcon} from "lucide-react"
 import Link from "next/link"
 import { usePathname } from 'next/navigation';
+import Profil from "@/components/Profil/Profil";
+import Image from "next/image"
+import johnDoe from "../../../public/john-doe.png"
+
 
 interface BreadcrumbItem {
     label: string
@@ -21,6 +25,7 @@ export default function TopNav() {
         { label: pathname || 'dashboard'},
     ]
 
+    // @ts-ignore
     return (
         <nav className="px-3 sm:px-6 flex items-center justify-between bg-white dark:bg-[#0F0F12] border-b border-gray-200 dark:border-[#1F1F23] h-full">
             <div className="font-medium text-sm hidden sm:flex items-center space-x-1 truncate max-w-[300px]">
@@ -59,6 +64,30 @@ export default function TopNav() {
                         sideOffset={8}
                         className="w-[280px] sm:w-80 bg-background border-border rounded-lg shadow-lg"
                     >
+                    </DropdownMenuContent>
+                </DropdownMenu>
+
+                <DropdownMenu>
+                    <DropdownMenuTrigger className="focus:outline-none">
+                        <Image
+                            src={johnDoe}
+                            alt="User avatar"
+                            width={28}
+                            height={28}
+                            className="rounded-full ring-2 ring-gray-200 dark:ring-[#2B2B30] sm:w-8 sm:h-8 cursor-pointer"
+                        />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent
+                        align="end"
+                        sideOffset={8}
+                        className="w-[280px] sm:w-80 bg-background border-border rounded-lg shadow-lg"
+                    >
+                        <Profil
+                            name="John Doe"
+                            role="Developer"
+                            avatarSrc={johnDoe.src}
+                            subscription="Pro"
+                        />
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>

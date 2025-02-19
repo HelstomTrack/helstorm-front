@@ -1,6 +1,4 @@
 "use client";
-import withAuth from "@/utils/withAuth";
-import Sidebar from "@/components/Sidebar/Sidebar";
 import {ChartArea} from "@/components/Charts/ChartArea";
 import {ChartBar} from "@/components/Charts/ChartBar";
 import {ChartLine} from "@/components/Charts/ChartLine";
@@ -17,4 +15,4 @@ const success = () => {
         </div>
     );
 }
-export default withAuth(success);
+export default success;
