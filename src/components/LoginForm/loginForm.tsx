@@ -10,14 +10,13 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { setAccessToken } from "@/utils/api/auth/auth";
 
-// ✅ Définition du schéma de validation avec Zod
 const formSchema = z.object({
     username: z.string().min(2, { message: "Username must be at least 2 characters." }),
     password: z.string().min(4, { message: "Password must be at least 6 characters." }),
 });
 
-// ✅ Définition du type dérivé du schéma Zod
 type FormData = z.infer<typeof formSchema>;
 
 export function LoginForm() {
@@ -26,7 +25,7 @@ export function LoginForm() {
         handleSubmit,
         formState: { errors },
     } = useForm<FormData>({
-        resolver: zodResolver(formSchema), // ✅ Validation avec Zod
+        resolver: zodResolver(formSchema),
     });
 
     const [errorMessage, setErrorMessage] = useState("");
@@ -39,15 +38,16 @@ export function LoginForm() {
                 password: data.password,
             });
 
-            const token = response.data.token;
-            Cookies.set("token", token, { expires: 1 });
+            const { token, refresh_token } = response.data;
+
+            setAccessToken(token);
+            document.cookie = `refresh_token=${refresh_token}; Path=/; Secure; HttpOnly; SameSite=Strict`;
 
             router.push("/dashboard");
         } catch (error) {
-            setErrorMessage("Identifiants incorrects !");
+            console.error("Erreur de connexion", error);
         }
     };
-
     return (
         <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col items-center gap-2 text-center">

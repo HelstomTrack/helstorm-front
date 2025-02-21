@@ -1,3 +1,5 @@
+import {getToken} from "@/utils/cookieDecode";
+
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const programApi = {
@@ -11,6 +13,17 @@ export const programApi = {
     },
 };
 
+export const userApi = {
+    async getUserById(id) {
+        const response = await fetch(`${API_BASE_URL}/api/user/${id}`,{
+            headers: {
+                authorization: `Bearer ${getToken()}`
+            }
+        });
+
+        return response.json();
+    },
+}
 export const planApi = {
     async getPlans() {
         const response = await fetch(`${API_BASE_URL}/plan`);

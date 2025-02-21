@@ -20,4 +20,4 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         </div>
     );
 }
-export default DashboardLayout;
+export default withAuth(DashboardLayout);

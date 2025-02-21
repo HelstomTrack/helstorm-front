@@ -1,12 +1,15 @@
 "use client"
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import {Bell, ChevronRight, UserIcon} from "lucide-react"
+import {Bell, ChevronRight} from "lucide-react"
 import Link from "next/link"
 import { usePathname } from 'next/navigation';
 import Profil from "@/components/Profil/Profil";
 import Image from "next/image"
 import johnDoe from "../../../public/john-doe.png"
+import {userApi} from "@/utils/api";
+import useSWR from "swr";
+import {getUserId} from "@/utils/cookieDecode";
 
 
 interface BreadcrumbItem {
@@ -14,7 +17,15 @@ interface BreadcrumbItem {
     href?: string
 }
 
+
+const fetcher = async () => await userApi.getUserById(getUserId());
+
 export default function TopNav() {
+
+    const { data: user, error } = useSWR("user", fetcher, {
+        suspense: true,
+    });
+    console.log(user.email);
     const capitalize = (str: string) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     };
@@ -25,7 +36,6 @@ export default function TopNav() {
         { label: pathname || 'dashboard'},
     ]
 
-    // @ts-ignore
     return (
         <nav className="px-3 sm:px-6 flex items-center justify-between bg-white dark:bg-[#0F0F12] border-b border-gray-200 dark:border-[#1F1F23] h-full">
             <div className="font-medium text-sm hidden sm:flex items-center space-x-1 truncate max-w-[300px]">
@@ -83,7 +93,7 @@ export default function TopNav() {
                         className="w-[280px] sm:w-80 bg-background border-border rounded-lg shadow-lg"
                     >
                         <Profil
-                            name="John Doe"
+                            name={`${user.firstname} ${user.lastname}`}
                             role="Developer"
                             avatarSrc={johnDoe.src}
                             subscription="Pro"

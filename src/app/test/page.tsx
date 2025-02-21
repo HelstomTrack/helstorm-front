@@ -1,11 +1,12 @@
 "use client";
 
 import useSWR from "swr";
-import {planApi, programApi} from "@/utils/api";
-import {Program, Plan} from "@/utils/types";
+import {planApi, programApi, userApi} from "@/utils/api";
+import {getUserId} from "@/utils/cookieDecode";
 
-const fetcher = async () => await planApi.getPlanById(1);
 
+const fetcher = async () => await userApi.getUserById(1);
+getUserId();
 export default function Test() {
     const { data: programs, error } = useSWR("programs", fetcher, {
         suspense: true,
@@ -19,11 +20,7 @@ export default function Test() {
         <div className="p-4">
             <h1 className="text-xl font-bold mb-4">Liste des Programmes</h1>
             <ul className="space-y-4">
-                {programs?.map((program: Program) => (
-                    <li key={program.id} className="p-4 border rounded-lg shadow">
-                        <h2 className="text-lg font-semibold">{program.name}</h2>
-                    </li>
-                ))}
+
             </ul>
 
         </div>

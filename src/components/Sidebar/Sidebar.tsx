@@ -5,12 +5,8 @@ import {
     Receipt,
     Building2,
     CreditCard,
-    Folder,
     Wallet,
-    Users2,
-    Shield,
     MessagesSquare,
-    Video,
     Settings,
     HelpCircle,
     Menu,
@@ -86,7 +82,7 @@ export default function Sidebar() {
                         <div className="space-y-6">
                             <div>
                                 <div className="px-3 mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                    Overview
+                                    Mon espace
                                 </div>
                                 <div className="space-y-1">
                                     <NavItem href="/dashboard" icon={Home}>
@@ -98,8 +94,8 @@ export default function Sidebar() {
                                     <NavItem href="/dashboard/plan" icon={Building2}>
                                         Programme sportif
                                     </NavItem>
-                                    <NavItem href="/dashboard/chat" icon={Folder}>
-                                        chatbot
+                                    <NavItem href="/dashboard/chat" icon={MessagesSquare}>
+                                        Chatbot
                                     </NavItem>
                                 </div>
                             </div>
@@ -117,26 +113,6 @@ export default function Sidebar() {
                                     </NavItem>
                                     <NavItem href="#" icon={CreditCard}>
                                         Payments
-                                    </NavItem>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div className="px-3 mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                    Team
-                                </div>
-                                <div className="space-y-1">
-                                    <NavItem href="#" icon={Users2}>
-                                        Members
-                                    </NavItem>
-                                    <NavItem href="#" icon={Shield}>
-                                        Permissions
-                                    </NavItem>
-                                    <NavItem href="#" icon={MessagesSquare}>
-                                        Chat
-                                    </NavItem>
-                                    <NavItem href="#" icon={Video}>
-                                        Meetings
                                     </NavItem>
                                 </div>
                             </div>
