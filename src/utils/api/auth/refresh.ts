@@ -13,6 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(401).json({ message: "Refresh token manquant" });
     }
 
+    // @ts-ignore
     try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/token/refresh`, {
             refresh_token: refreshToken,
@@ -24,7 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             serialize("refresh_token", newRefreshToken, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
-                sameSite: "Strict",
+                sameSite: "strict",
                 path: "/",
             }),
         ]);

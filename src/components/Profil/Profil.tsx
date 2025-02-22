@@ -1,7 +1,10 @@
+"use client";
 import type React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Settings, CreditCard, FileText, LogOut } from "lucide-react"
+import {removeAccessToken} from "@/utils/api/auth/auth";
+import { useRouter } from "next/navigation";
 
 interface MenuItem {
     label: string
@@ -19,6 +22,12 @@ interface ProfileProps {
 }
 
 export default function Profile({ name, role, avatarSrc, subscription }: ProfileProps) {
+    const router = useRouter();
+
+    const handleLogout = () => {
+        removeAccessToken();
+        router.push("/login");
+    };
     const menuItems: MenuItem[] = [
         {
             label: "Subscription",
@@ -75,6 +84,7 @@ export default function Profile({ name, role, avatarSrc, subscription }: Profile
                             </Link>
                         ))}
                         <button
+                            onClick={handleLogout}
                             type="button"
                             className="w-full flex items-center justify-between p-2 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 rounded-lg transition-colors duration-200"
                         >

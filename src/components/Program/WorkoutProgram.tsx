@@ -7,11 +7,12 @@ import { Dumbbell, Clock, Zap, Calendar } from "lucide-react";
 import { planApi } from "@/utils/api";
 import useSWR from "swr";
 import {Exercise, Program} from "@/utils/types";
+import {getUserId} from "@/utils/cookieDecode";
 
 const fetcher = async () => {
     try {
-        const response = await planApi.getPlanById(1);
-        return response.length > 0 ? response[0] : null; // Retourne l'objet plan complet
+        const response = await planApi.getPlanById(getUserId());
+        return response.length > 0 ? response[0] : null;
     } catch (error) {
         console.error("Erreur lors de la récupération des données", error);
         return null;

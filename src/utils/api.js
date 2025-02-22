@@ -2,6 +2,7 @@ import {getToken} from "@/utils/cookieDecode";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
+
 export const programApi = {
     async getPrograms() {
         const response = await fetch(`${API_BASE_URL}/program`);
