@@ -1,9 +1,8 @@
-import axios from "axios";
-import { getAccessToken, setAccessToken, removeAccessToken } from "./auth";
-
+import axios from 'axios';
+import { getAccessToken, removeTokens } from './auth';
+import {refreshAccessToken}  from '../../api';
 const api = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
-    withCredentials: true,
 });
 
 api.interceptors.request.use(
@@ -21,20 +20,13 @@ api.interceptors.response.use(
     (response) => response,
     async (error) => {
         if (error.response?.status === 401) {
-            try {
-                const refreshResponse = await axios.post("/api/auth/refresh");
-
-                const newToken = refreshResponse.data.token;
-                setAccessToken(newToken);
-
+            const newToken = await refreshAccessToken();
+            if (newToken) {
                 error.config.headers.Authorization = `Bearer ${newToken}`;
                 return axios(error.config);
-            } catch (refreshError) {
-                console.error("Impossible de rafraîchir le token, déconnexion...");
-                removeAccessToken();
-                window.location.href = "/login";
-                return Promise.reject(refreshError);
             }
+            removeTokens();
+            window.location.href = '/login';
         }
         return Promise.reject(error);
     }

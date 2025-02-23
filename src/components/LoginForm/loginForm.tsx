@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { setAccessToken } from "@/utils/api/auth/auth";
+import {setAccessToken, setRefreshToken} from "@/utils/api/auth/auth";
 
 const formSchema = z.object({
     username: z.string().min(2, { message: "Username must be at least 2 characters." }),
@@ -41,13 +41,14 @@ export function LoginForm() {
             const { token, refresh_token } = response.data;
 
             setAccessToken(token);
-            document.cookie = `refresh_token=${refresh_token}; Path=/; Secure; HttpOnly; SameSite=Strict`;
+            setRefreshToken(refresh_token);
 
             router.push("/dashboard");
         } catch (error) {
             console.error("Erreur de connexion", error);
         }
     };
+
     return (
         <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col items-center gap-2 text-center">

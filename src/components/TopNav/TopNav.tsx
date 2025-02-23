@@ -25,7 +25,6 @@ export default function TopNav() {
     const { data: user, error } = useSWR("user", fetcher, {
         suspense: true,
     });
-    console.log(user.email);
     const capitalize = (str: string) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     };

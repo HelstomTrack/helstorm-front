@@ -110,7 +110,7 @@ export default function RegisterForm() {
     ]
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-100 to-blue-100 p-4">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br p-4">
             <Card className="w-full max-w-lg bg-white/80 backdrop-blur-sm shadow-xl">
                 <CardHeader>
                     <CardTitle className="text-2xl font-bold text-center text-gray-800">Créer un compte</CardTitle>
