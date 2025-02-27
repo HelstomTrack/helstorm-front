@@ -17,6 +17,7 @@ export function AccountDetails({ register, errors }: AccountDetailsProps) {
                 <Input
                     id="email"
                     type="email"
+                    placeholder={"Entrez votre adresse email"}
                     {...register("email")}
                     className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
@@ -29,6 +30,7 @@ export function AccountDetails({ register, errors }: AccountDetailsProps) {
                 <Input
                     id="password"
                     type="password"
+                    placeholder={"Entrez votre mot de passe"}
                     {...register("password")}
                     className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
                 />

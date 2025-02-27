@@ -16,6 +16,7 @@ export function PersonalInfo({ register, errors }: PersonalInfoProps) {
                 </Label>
                 <Input
                     id="firstname"
+                    placeholder={"Entrez votre prénom"}
                     {...register("firstname")}
                     className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
@@ -27,6 +28,7 @@ export function PersonalInfo({ register, errors }: PersonalInfoProps) {
                 </Label>
                 <Input
                     id="lastname"
+                    placeholder={"Entrez votre nom"}
                     {...register("lastname")}
                     className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
@@ -38,6 +40,7 @@ export function PersonalInfo({ register, errors }: PersonalInfoProps) {
                 </Label>
                 <Input
                     id="phone"
+                    placeholder={"Entrez votre numéro de téléphone"}
                     {...register("phone")}
                     className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
                 />

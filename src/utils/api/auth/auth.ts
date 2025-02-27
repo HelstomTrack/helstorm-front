@@ -17,6 +17,7 @@ export const getAccessToken = () => {
 
 export const removeAccessToken = () => {
     Cookies.remove("token");
+    localStorage.removeItem('refresh_token');
 };
 
 export const removeTokens = () => {

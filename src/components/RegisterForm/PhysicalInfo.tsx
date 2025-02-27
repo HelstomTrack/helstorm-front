@@ -17,6 +17,7 @@ export function PhysicalInfo({ register, errors }: PhysicalInfoProps) {
           </Label>
           <Input
               id="age"
+              placeholder={"Entrez votre âge"}
               type="number"
               {...register("age", { valueAsNumber: true })}
               className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -30,6 +31,7 @@ export function PhysicalInfo({ register, errors }: PhysicalInfoProps) {
           <Input
               id="weight"
               type="number"
+              placeholder={"Entrez votre poids"}
               {...register("weight", { valueAsNumber: true })}
               className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
           />
@@ -42,6 +44,7 @@ export function PhysicalInfo({ register, errors }: PhysicalInfoProps) {
           <Input
               id="height"
               type="number"
+                placeholder={"Entrez votre taille"}
               {...register("height", { valueAsNumber: true })}
               className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
           />
