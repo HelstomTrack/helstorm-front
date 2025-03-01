@@ -1,8 +1,6 @@
-"use client";
 import React from 'react';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import TopNav from "@/components/TopNav/TopNav";
-import withAuth from "@/utils/withAuth";
 
 interface DashboardLayoutProps {
     children: React.ReactNode;
@@ -20,4 +18,4 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         </div>
     );
 }
-export default withAuth(DashboardLayout);
+export default DashboardLayout;

@@ -6,14 +6,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Dumbbell, Clock, Zap, Calendar } from "lucide-react";
 import { planApi } from "@/utils/api";
 import useSWR from "swr";
-import { Exercise, Program } from "@/utils/types";
+import { Exercise } from "@/utils/types";
 import { getUserId } from "@/utils/cookieDecode";
 
 const fetcher = async () => {
     try {
         const response = await planApi.getPlanById(getUserId());
+        console.log("Plan récupéré:", response);
         return response.length > 0 ? response[0] : null;
-        console.log('zeubi' + response);
     } catch (error) {
         console.error("Erreur lors de la récupération des données", error);
         return null;
@@ -21,12 +21,17 @@ const fetcher = async () => {
 };
 
 export default function WorkoutProgram() {
-    const { data: plan, error } = useSWR("workout-plan", fetcher, {
-        suspense: true,
-    });
-    console.log(plan);
-    if (error) return <div>Erreur de chargement du programme...</div>;
-    if (!plan || !plan.programs || !plan.programs.length) return <div>Chargement...</div>;
+    const [activeDay] = useState("Lundi");
+    const { data: plan, error } = useSWR("workout-plan", fetcher, { suspense: true });
+
+    if (error) {
+        console.error("Erreur SWR:", error);
+        return <div>Erreur de chargement du programme...</div>;
+    }
+
+    if (!plan || !plan.programs || !plan.programs.length) {
+        return <div>Chargement...</div>;
+    }
 
     const daysOrder = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
 
@@ -34,8 +39,6 @@ export default function WorkoutProgram() {
         const program = plan.programs[index];
         return program ? { ...program, day } : { day, exercises: [] };
     });
-
-    const [activeDay] = useState(daysOrder[0]);
 
     return (
         <div className="container mx-auto p-4">
@@ -67,7 +70,7 @@ export default function WorkoutProgram() {
                             <CardContent>
                                 <div className="space-y-4">
                                     {program.exercises.length > 0 ? (
-                                        program.exercises.map((exercise: Exercise, exerciseIndex: never) => (
+                                        program.exercises.map((exercise: Exercise, exerciseIndex: number) => (
                                             <Card key={`${exercise.id}-${exerciseIndex}`}>
                                                 <CardHeader className="p-3 md:p-4">
                                                     <CardTitle className="text-base md:text-lg flex items-center justify-between">
@@ -85,7 +88,9 @@ export default function WorkoutProgram() {
                                                         </div>
                                                         <div className="flex items-center space-x-2">
                                                             <Clock className="h-4 w-4 text-blue-500" />
-                                                            <span className="text-sm md:text-base">Repos: {exercise.rest_time}s</span>
+                                                            <span className="text-sm md:text-base">
+                                                                Repos: {exercise.rest_time}s
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </CardContent>

@@ -1,38 +1,37 @@
 "use client"
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import {Bell, ChevronRight} from "lucide-react"
+import { Bell, ChevronRight } from "lucide-react"
 import Link from "next/link"
-import { usePathname } from 'next/navigation';
-import Profil from "@/components/Profil/Profil";
+import { usePathname } from "next/navigation"
+import Profil from "@/components/Profil/Profil"
 import Image from "next/image"
 import johnDoe from "../../../public/john-doe.png"
-import {userApi} from "@/utils/api";
-import useSWR from "swr";
-import {getUserId} from "@/utils/cookieDecode";
-
+import { userApi } from "@/utils/api"
+import useSWR from "swr"
+import { getUserId } from "@/utils/cookieDecode"
 
 interface BreadcrumbItem {
     label: string
     href?: string
 }
 
+const capitalize = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+}
 
-const fetcher = async () => await userApi.getUserById(getUserId());
+const fetcher = async () => await userApi.getUserById(getUserId())
 
 export default function TopNav() {
+    // 💡 Utilisation de usePathname en premier pour éviter l'erreur d'ordre des hooks
+    const pathname = usePathname().split("/").map(capitalize).pop()
 
-    const { data: user, error } = useSWR("user", fetcher, {
-        suspense: true,
-    });
-    const capitalize = (str: string) => {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-    };
-    const pathname = usePathname().split("/").map(capitalize).pop();
+    // 💡 useSWR est appelé APRES usePathname pour garder l'ordre correct des hooks
+    const { data: user, error } = useSWR("user", fetcher, { suspense: true })
 
     const breadcrumbs: BreadcrumbItem[] = [
-        { label: "Helstorm-track"},
-        { label: pathname || 'dashboard'},
+        { label: "Helstorm-track" },
+        { label: pathname || "dashboard" },
     ]
 
     return (
@@ -40,7 +39,9 @@ export default function TopNav() {
             <div className="font-medium text-sm hidden sm:flex items-center space-x-1 truncate max-w-[300px]">
                 {breadcrumbs.map((item, index) => (
                     <div key={item.label} className="flex items-center">
-                        {index > 0 && <ChevronRight className="h-4 w-4 text-gray-500 dark:text-gray-400 mx-1" />}
+                        {index > 0 && (
+                            <ChevronRight className="h-4 w-4 text-gray-500 dark:text-gray-400 mx-1" />
+                        )}
                         {item.href ? (
                             <Link
                                 href={item.href}
@@ -63,17 +64,13 @@ export default function TopNav() {
                     <Bell className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600 dark:text-gray-300" />
                 </button>
 
-
                 <DropdownMenu>
-                    <DropdownMenuTrigger className="focus:outline-none">
-
-                    </DropdownMenuTrigger>
+                    <DropdownMenuTrigger className="focus:outline-none"></DropdownMenuTrigger>
                     <DropdownMenuContent
                         align="end"
                         sideOffset={8}
                         className="w-[280px] sm:w-80 bg-background border-border rounded-lg shadow-lg"
-                    >
-                    </DropdownMenuContent>
+                    ></DropdownMenuContent>
                 </DropdownMenu>
 
                 <DropdownMenu>
@@ -91,16 +88,21 @@ export default function TopNav() {
                         sideOffset={8}
                         className="w-[280px] sm:w-80 bg-background border-border rounded-lg shadow-lg"
                     >
-                        <Profil
-                            name={`${user.firstname} ${user.lastname}`}
-                            role="Developer"
-                            avatarSrc={johnDoe.src}
-                            subscription="Pro"
-                        />
+                        {user ? (
+                            <Profil
+                                name={`${user.firstname} ${user.lastname}`}
+                                role="Developer"
+                                avatarSrc={johnDoe.src}
+                                subscription="Pro"
+                            />
+                        ) : (
+                            <p className="p-4 text-gray-500 dark:text-gray-400">
+                                Loading user...
+                            </p>
+                        )}
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
         </nav>
     )
 }
-

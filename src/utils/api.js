@@ -1,5 +1,5 @@
 import {getToken} from "@/utils/cookieDecode";
-import {getAccessToken, getRefreshToken, removeAccessToken, removeTokens, setAccessToken} from "@/utils/api/auth/auth";
+import {getAccessToken, getRefreshToken, removeTokens, setAccessToken} from "@/utils/api/auth/auth";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -17,20 +17,32 @@ export const programApi = {
 
 export const userApi = {
     async getUserById(id) {
+        const token = getAccessToken();
+
+        // Redirection immédiate si aucun token n'est disponible
+        if (!token) {
+            window.location.href = "/login";
+            return null;
+        }
+
         try {
             let response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/${id}`, {
                 headers: {
-                    authorization: `Bearer ${getAccessToken()}`
+                    authorization: `Bearer ${token}`
                 }
             });
 
+            // Si le token est expiré, tenter de le rafraîchir
             if (response.status === 401) {
                 const refreshedToken = await refreshAccessToken();
 
+                // Si le rafraîchissement échoue, redirection vers /login
                 if (!refreshedToken) {
-                    throw new Error("Impossible de rafraîchir le token");
+                    window.location.href = "/login";
+                    return null;
                 }
 
+                // Nouvelle requête avec le token rafraîchi
                 response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/${id}`, {
                     headers: {
                         authorization: `Bearer ${refreshedToken}`
