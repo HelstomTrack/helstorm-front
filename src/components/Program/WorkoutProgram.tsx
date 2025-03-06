@@ -22,7 +22,7 @@ const fetcher = async () => {
 
 export default function WorkoutProgram() {
     const [activeDay] = useState("Lundi");
-    const { data: plan, error } = useSWR("workout-plan", fetcher, { suspense: true });
+    const { data: plan, error } = useSWR("workout-plan", fetcher, { suspense: true, fallbackData: [] })
 
     if (error) {
         console.error("Erreur SWR:", error);

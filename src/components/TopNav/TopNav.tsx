@@ -23,11 +23,9 @@ const capitalize = (str: string) => {
 const fetcher = async () => await userApi.getUserById(getUserId())
 
 export default function TopNav() {
-    // 💡 Utilisation de usePathname en premier pour éviter l'erreur d'ordre des hooks
     const pathname = usePathname().split("/").map(capitalize).pop()
 
-    // 💡 useSWR est appelé APRES usePathname pour garder l'ordre correct des hooks
-    const { data: user, error } = useSWR("user", fetcher, { suspense: true })
+    const { data: user, error } = useSWR("user", fetcher, { suspense: true, fallbackData: null })
 
     const breadcrumbs: BreadcrumbItem[] = [
         { label: "Helstorm-track" },
