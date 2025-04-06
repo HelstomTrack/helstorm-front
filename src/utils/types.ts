@@ -18,3 +18,19 @@ export type Plan = {
     name: string;
     programs: Program[];
 };
+
+export type Diet = {
+    name: string;
+    meals: Meal[];
+};
+
+export type Meal = {
+    name: string;
+    total_calories: number;
+    food: Food[];
+};
+
+export type Food = {
+    name: string;
+};
+

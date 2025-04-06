@@ -88,7 +88,7 @@ export default function Sidebar() {
                                     <NavItem href="/dashboard" icon={Home}>
                                         Dashboard
                                     </NavItem>
-                                    <NavItem href="" icon={BarChart2}>
+                                    <NavItem href="/dashboard/diet" icon={BarChart2}>
                                         Programme alimentaire
                                     </NavItem>
                                     <NavItem href="/dashboard/plan" icon={Building2}>

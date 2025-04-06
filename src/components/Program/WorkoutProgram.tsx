@@ -6,13 +6,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Dumbbell, Clock, Zap, Calendar } from "lucide-react";
 import { planApi } from "@/utils/api";
 import useSWR from "swr";
-import { Exercise } from "@/utils/types";
+import {Exercise, Program} from "@/utils/types";
 import { getUserId } from "@/utils/cookieDecode";
 
 const fetcher = async () => {
     try {
         const response = await planApi.getPlanById(getUserId());
-        console.log("Plan récupéré:", response);
         return response.length > 0 ? response[0] : null;
     } catch (error) {
         console.error("Erreur lors de la récupération des données", error);
@@ -22,15 +21,10 @@ const fetcher = async () => {
 
 export default function WorkoutProgram() {
     const [activeDay] = useState("Lundi");
-    const { data: plan, error } = useSWR("workout-plan", fetcher, { suspense: true, fallbackData: [] })
-
-    if (error) {
-        console.error("Erreur SWR:", error);
-        return <div>Erreur de chargement du programme...</div>;
-    }
+    const { data: plan } = useSWR("workout-plan", fetcher, { suspense: true, fallbackData: [] })
 
     if (!plan || !plan.programs || !plan.programs.length) {
-        return <div>Chargement...</div>;
+        return;
     }
 
     const daysOrder = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
@@ -53,7 +47,7 @@ export default function WorkoutProgram() {
                         </TabsTrigger>
                     ))}
                 </TabsList>
-                {programsByDay.map((program, index) => (
+                {programsByDay.map((program: Program, index) => (
                     <TabsContent key={`${program.day}-${index}`} value={program.day}>
                         <Card>
                             <CardHeader>
@@ -67,6 +61,7 @@ export default function WorkoutProgram() {
                                     {program.name || "No Program"}
                                 </CardDescription>
                             </CardHeader>
+
                             <CardContent>
                                 <div className="space-y-4">
                                     {program.exercises.length > 0 ? (

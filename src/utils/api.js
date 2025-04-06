@@ -1,4 +1,3 @@
-import {getToken} from "@/utils/cookieDecode";
 import {getAccessToken, getRefreshToken, removeTokens, setAccessToken} from "@/utils/api/auth/auth";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -36,13 +35,11 @@ export const userApi = {
             if (response.status === 401) {
                 const refreshedToken = await refreshAccessToken();
 
-                // Si le rafraîchissement échoue, redirection vers /login
                 if (!refreshedToken) {
                     window.location.href = "/login";
                     return null;
                 }
 
-                // Nouvelle requête avec le token rafraîchi
                 response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/${id}`, {
                     headers: {
                         authorization: `Bearer ${refreshedToken}`
@@ -102,6 +99,18 @@ export const planApi = {
     },
     async getPlanById(id) {
         const response = await fetch(`${API_BASE_URL}/program/user/${id}`);
+        return response.json();
+    },
+    async getDietById(id) {
+        const token = getAccessToken();
+        const response = await fetch(`${API_BASE_URL}/api/diet-day/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: `Bearer ${token}`
+            }
+        });
+
         return response.json();
     },
 }
