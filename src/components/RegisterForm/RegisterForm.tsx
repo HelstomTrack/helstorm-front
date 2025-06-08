@@ -24,7 +24,13 @@ const formSchema = z.object({
     age: z.number().min(18, "Vous devez avoir au moins 18 ans").max(120, "Âge invalide"),
     weight: z.number().min(30, "Poids minimum 30 kg").max(300, "Poids maximum 300 kg"),
     height: z.number().min(100, "Taille minimum 100 cm").max(250, "Taille maximum 250 cm"),
-    goal: z.enum(["weight_loss", "muscle_gain", "maintain"]),
+    goal: z.enum(["Shred",
+        "Cut",
+        "Bulk",
+        "Strong",
+        "Fit",
+        "Power",
+        "Enduro"]),
     level: z.enum(["beginner", "intermediate", "advanced"]),
     gender: z.enum(["man", "woman", "other"]),
 })
@@ -47,7 +53,7 @@ export default function RegisterForm() {
     } = useForm<FormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            goal: "weight_loss",
+            goal: "Shred",
             level: "beginner",
             gender: "other",
         },
