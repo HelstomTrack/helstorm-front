@@ -5,9 +5,7 @@ import {swrConfig} from "@/utils/swrCache";
 
 export default function plan() {
     return (
-        <SWRConfig value={swrConfig}>
         <WorkoutProgram />
-        </SWRConfig>
     )
 }
 

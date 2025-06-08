@@ -94,13 +94,21 @@ export async function refreshAccessToken() {
 
 export const planApi = {
     async getPlans() {
-        const response = await fetch(`${API_BASE_URL}/plan`);
+        const response = await fetch(`${API_BASE_URL}/api/plan`);
         return response.json();
     },
     async getPlanById(id) {
-        const response = await fetch(`${API_BASE_URL}/program/user/${id}`);
+        const token = getAccessToken();
+        const response = await fetch(`${API_BASE_URL}/api/program/user/${id}`, {
+
+            method: 'GET',
+                headers: {
+            'Content-Type': 'application/json',
+                authorization: `Bearer ${token}`
+        }
+    });
         return response.json();
-    },
+},
     async getDietById(id) {
         const token = getAccessToken();
         const response = await fetch(`${API_BASE_URL}/api/diet-day/${id}`, {

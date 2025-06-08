@@ -7,6 +7,7 @@ import BackgroundImage from "@/components/ImageComponents/BackgroundImage";
 import SubscriptionCards from "@/components/SubscriptionCard/SubscriptionCards";
 import AnimatedSection from "@/hooks/AnimatedSection";
 import Features from "@/components/Features/Features";
+import Link from "next/link";
 
 export default function LandingPage() {
     return (
@@ -18,17 +19,14 @@ export default function LandingPage() {
                 >
                     <section className="text-center py-20">
                         <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
-                            Votre coach personnel de poche
+                            Obtenez votre plan alimentaire et sportif en un clic !
                         </h1>
                         <p className="text-xl text-white mb-8">
                             Obtenez des programmes sportifs et alimentaires sur mesure, générés en fonction de vos besoins spécifiques.
                         </p>
-                        <Button size="lg" className="mr-4 bg-gray-900">
-                            Commencer gratuitement
-                        </Button>
-                        <Button size="lg" variant="secondary">
-                            Voir une démo
-                        </Button>
+                        <Link href="/login">
+                            <Button variant="secondary" className="text-sm/6 font-semibold text-gray-900 transition-all duration-300 hover:scale-110">Commencer maintenant</Button>
+                        </Link>
                     </section>
                 </BackgroundImage>
             </div>
@@ -45,9 +43,7 @@ export default function LandingPage() {
                         <p className="mb-6">
                             Rejoignez des milliers d&apos;utilisateurs satisfaits et commencez votre parcours fitness dès aujourd&apos;hui.
                         </p>
-                        <Button size="lg" variant="secondary">
-                            Créer mon programme personnalisé
-                        </Button>
+                        <Button variant="secondary" className="text-sm/6 font-semibold text-gray-900 transition-all duration-300 hover:scale-110">Commencer maintenant</Button>
                     </section>
                 </AnimatedSection>
 
