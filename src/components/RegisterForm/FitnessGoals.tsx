@@ -20,13 +20,8 @@ export function FitnessGoals({ register, errors, setValue }: FitnessGoalsProps) 
                         <SelectValue placeholder="Sélectionnez votre objectif" />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="Shred">Perte de poids rapide</SelectItem>
-                        <SelectItem value="Cut">Définition musculaire</SelectItem>
+                        <SelectItem value="Cut">Définition musculaire (sèche)</SelectItem>
                         <SelectItem value="Bulk">Prise de masse</SelectItem>
-                        <SelectItem value="Strong">Force et puissance</SelectItem>
-                        <SelectItem value="Fit">Forme générale / Maintien</SelectItem>
-                        <SelectItem value="Power">Force pure</SelectItem>
-                        <SelectItem value="Enduro">Endurance / Cardio</SelectItem>
                     </SelectContent>
                 </Select>
                 {errors.goal && <p className="text-red-500 text-xs mt-1">{errors.goal.message as string}</p>}
