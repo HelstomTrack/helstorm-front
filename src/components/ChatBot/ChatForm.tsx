@@ -37,7 +37,7 @@ export function ChatForm({ className, ...props }: React.ComponentProps<"div">) {
         setInput("")
 
         try {
-            const response = await fetch("http://localhost:443/chat/prog", {
+            const response = await fetch("http://localhost:80/chat/prog", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
