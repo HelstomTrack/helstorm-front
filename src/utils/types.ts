@@ -1,36 +1,11 @@
-export type Exercise = {
-    id: number;
-    name: string;
-    description: string;
-    rest_time: number;
-    difficulty: string;
-};
-
-export type Program = {
-    id: number;
-    name: string;
-    exercises: Exercise[];
-    day: string;
-};
-
-export type Plan = {
-    id: number;
-    name: string;
-    programs: Program[];
-};
-
-export type Diet = {
-    name: string;
-    meals: Meal[];
-};
-
-export type Meal = {
-    name: string;
-    total_calories: number;
-    food: Food[];
-};
 
 export type Food = {
     name: string;
 };
 
+
+type Exercise = { nom: string; series?: number; repetitions?: string | number; repos?: string; conseils?: string }
+type SportDay = { jour: string; type_seance?: string; duree?: string | number; intensite?: string; zones_ciblees?: string[]; exercices?: Exercise[] }
+type Meal = { type: string; description: string; calories?: number }
+type FoodDay = { jour: string; repas?: Meal[] }
+type ProgramDTO = { programme_sportif?: SportDay[]; programme_alimentaire?: FoodDay[]; conseils?: string[] }

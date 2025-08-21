@@ -25,7 +25,7 @@ export const userApi = {
         }
 
         try {
-            let response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/${id}`, {
+            let response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/user/${id}`, {
                 headers: {
                     authorization: `Bearer ${token}`
                 }
@@ -40,7 +40,7 @@ export const userApi = {
                     return null;
                 }
 
-                response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/${id}`, {
+                response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/user/${id}`, {
                     headers: {
                         authorization: `Bearer ${refreshedToken}`
                     }
@@ -68,7 +68,7 @@ export async function refreshAccessToken() {
     }
 
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/token/refresh`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/token/refresh`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -94,12 +94,12 @@ export async function refreshAccessToken() {
 
 export const planApi = {
     async getPlans() {
-        const response = await fetch(`${API_BASE_URL}/api/plan`);
+        const response = await fetch(`${API_BASE_URL}/plan`);
         return response.json();
     },
     async getPlanById(id) {
         const token = getAccessToken();
-        const response = await fetch(`${API_BASE_URL}/api/program/user/${id}`, {
+        const response = await fetch(`${API_BASE_URL}/program/user/${id}`, {
 
             method: 'GET',
                 headers: {
@@ -111,7 +111,7 @@ export const planApi = {
 },
     async getDietById(id) {
         const token = getAccessToken();
-        const response = await fetch(`${API_BASE_URL}/api/diet-day/${id}`, {
+        const response = await fetch(`${API_BASE_URL}/diet-day/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
