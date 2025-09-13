@@ -39,13 +39,7 @@ export default function Profile({ name, role, avatarSrc, subscription }: Profile
             label: "Settings",
             href: "#",
             icon: <Settings className="w-4 h-4" />,
-        },
-        {
-            label: "Terms & Policies",
-            href: "#",
-            icon: <FileText className="w-4 h-4" />,
-            external: true,
-        },
+        }
     ]
 
     return (

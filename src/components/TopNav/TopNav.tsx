@@ -89,9 +89,9 @@ export default function TopNav() {
                         {user ? (
                             <Profil
                                 name={`${user.firstname} ${user.lastname}`}
-                                role="Developer"
+                                role="Membre"
                                 avatarSrc={johnDoe.src}
-                                subscription="Pro"
+                                subscription="Gratuit"
                             />
                         ) : (
                             <p className="p-4 text-gray-500 dark:text-gray-400">
