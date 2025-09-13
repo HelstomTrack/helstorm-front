@@ -74,7 +74,7 @@ export default function TopNav() {
                 <DropdownMenu>
                     <DropdownMenuTrigger className="focus:outline-none">
                         <Image
-                            src={johnDoe}
+                            src={"/avatar-logo.jpg"}
                             alt="User avatar"
                             width={28}
                             height={28}
