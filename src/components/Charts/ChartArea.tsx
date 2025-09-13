@@ -7,21 +7,21 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 
 const chartData = [
-    { month: "January", desktop: 186, mobile: 80 },
-    { month: "February", desktop: 305, mobile: 200 },
-    { month: "March", desktop: 237, mobile: 120 },
-    { month: "April", desktop: 73, mobile: 190 },
-    { month: "May", desktop: 209, mobile: 130 },
-    { month: "June", desktop: 214, mobile: 140 },
+    { month: "Janvier", calories: 8200, temps: 720 },
+    { month: "Février", calories: 9100, temps: 780 },
+    { month: "Mars", calories: 9600, temps: 820 },
+    { month: "Avril", calories: 9400, temps: 800 },
+    { month: "Mai", calories: 10200, temps: 860 },
+    { month: "Juin", calories: 10800, temps: 900 },
 ]
 
 const chartConfig = {
-    desktop: {
-        label: "Desktop",
+    calories: {
+        label: "Calories brûlées",
         color: "hsl(var(--chart-1))",
     },
-    mobile: {
-        label: "Mobile",
+    temps: {
+        label: "Temps d'entraînement (min)",
         color: "hsl(var(--chart-2))",
     },
 } satisfies ChartConfig
@@ -30,18 +30,15 @@ export function ChartArea() {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Area Chart - Stacked</CardTitle>
-                <CardDescription>Showing total visitors for the last 6 months</CardDescription>
+                <CardTitle>Progression — Calories & Temps d'entraînement</CardTitle>
+                <CardDescription>Janvier — Juin</CardDescription>
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig}>
                     <AreaChart
                         accessibilityLayer
                         data={chartData}
-                        margin={{
-                            left: 12,
-                            right: 12,
-                        }}
+                        margin={{ left: 12, right: 12 }}
                     >
                         <CartesianGrid vertical={false} />
                         <XAxis
@@ -49,23 +46,23 @@ export function ChartArea() {
                             tickLine={false}
                             axisLine={false}
                             tickMargin={8}
-                            tickFormatter={(value) => value.slice(0, 3)}
+                            tickFormatter={(value) => String(value).slice(0, 3)}
                         />
                         <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="dot" />} />
                         <Area
-                            dataKey="mobile"
+                            dataKey="calories"
                             type="natural"
-                            fill="var(--color-mobile)"
+                            fill="var(--color-calories)"
                             fillOpacity={0.4}
-                            stroke="var(--color-mobile)"
+                            stroke="var(--color-calories)"
                             stackId="a"
                         />
                         <Area
-                            dataKey="desktop"
+                            dataKey="temps"
                             type="natural"
-                            fill="var(--color-desktop)"
+                            fill="var(--color-temps)"
                             fillOpacity={0.4}
-                            stroke="var(--color-desktop)"
+                            stroke="var(--color-temps)"
                             stackId="a"
                         />
                     </AreaChart>
@@ -75,13 +72,14 @@ export function ChartArea() {
                 <div className="flex w-full items-start gap-2 text-sm">
                     <div className="grid gap-2">
                         <div className="flex items-center gap-2 font-medium leading-none">
-                            Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+                            Tendance positive sur 6 mois <TrendingUp className="h-4 w-4" />
                         </div>
-                        <div className="flex items-center gap-2 leading-none text-muted-foreground">January - June 2024</div>
+                        <div className="flex items-center gap-2 leading-none text-muted-foreground">
+                            Calories brûlées et temps total d'entraînement (Janv — Juin)
+                        </div>
                     </div>
                 </div>
             </CardFooter>
         </Card>
     )
 }
-

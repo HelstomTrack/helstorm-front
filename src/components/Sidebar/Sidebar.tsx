@@ -1,15 +1,13 @@
 "use client"
 
 import {
-    BarChart2,
     Receipt,
     Building2,
-    CreditCard,
-    Wallet,
     MessagesSquare,
     Settings,
     HelpCircle,
     Menu,
+    BicepsFlexed
 } from "lucide-react"
 
 import { Home } from "lucide-react"
@@ -88,31 +86,14 @@ export default function Sidebar() {
                                     <NavItem href="/dashboard" icon={Home}>
                                         Dashboard
                                     </NavItem>
-                                    <NavItem href="/dashboard/diet" icon={BarChart2}>
-                                        Programme alimentaire
-                                    </NavItem>
                                     <NavItem href="/dashboard/plan" icon={Building2}>
                                         Programme sportif
                                     </NavItem>
                                     <NavItem href="/dashboard/chat" icon={MessagesSquare}>
                                         Chatbot
                                     </NavItem>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div className="px-3 mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                    Finance
-                                </div>
-                                <div className="space-y-1">
-                                    <NavItem href="" icon={Wallet}>
-                                        Transactions
-                                    </NavItem>
-                                    <NavItem href="#" icon={Receipt}>
-                                        Invoices
-                                    </NavItem>
-                                    <NavItem href="#" icon={CreditCard}>
-                                        Payments
+                                    <NavItem href="/dashboard/assistance" icon={BicepsFlexed}>
+                                        Assistance
                                     </NavItem>
                                 </div>
                             </div>

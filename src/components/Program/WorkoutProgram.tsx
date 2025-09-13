@@ -244,12 +244,6 @@ const WorkoutProgram = () => {
                         </CardContent>
                     </Card>
                 )}
-
-                <div className="text-center mt-8">
-                    <Button onClick={fetchProgramData} disabled={loading} className="bg-blue-600 hover:bg-blue-700">
-                        {loading ? "Chargement..." : "Actualiser le programme"}
-                    </Button>
-                </div>
             </div>
         </div>
     )
