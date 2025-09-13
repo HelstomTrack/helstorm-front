@@ -39,13 +39,7 @@ export default function Profile({ name, role, avatarSrc, subscription }: Profile
             label: "Settings",
             href: "#",
             icon: <Settings className="w-4 h-4" />,
-        },
-        {
-            label: "Terms & Policies",
-            href: "#",
-            icon: <FileText className="w-4 h-4" />,
-            external: true,
-        },
+        }
     ]
 
     return (
@@ -55,7 +49,7 @@ export default function Profile({ name, role, avatarSrc, subscription }: Profile
                     <div className="flex items-center gap-4 mb-8">
                         <div className="relative shrink-0">
                             <Image
-                                src={avatarSrc || "/placeholder.svg"}
+                                src={"/avatar-logo.jpg"}
                                 alt={name}
                                 width={72}
                                 height={72}

@@ -61,7 +61,6 @@ export function PhysicalInfo({ register, errors }: PhysicalInfoProps) {
             <SelectContent>
               <SelectItem value="man">Homme</SelectItem>
               <SelectItem value="woman">Femme</SelectItem>
-              <SelectItem value="other">Autre</SelectItem>
             </SelectContent>
           </Select>
           {errors.gender && <p className="text-red-500 text-xs mt-1">{errors.gender.message as string}</p>}

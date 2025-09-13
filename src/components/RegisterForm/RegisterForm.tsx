@@ -6,14 +6,14 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { ChevronLeft, ChevronRight, User, Mail, Scale, Target, CheckCircle } from "lucide-react"
+import { ChevronLeft, ChevronRight, User, Mail, Scale, Target, CheckCircle, Loader2 } from "lucide-react"
 import { PersonalInfo } from "./PersonalInfo"
 import { AccountDetails } from "./AccountDetails"
 import { PhysicalInfo } from "./PhysicalInfo"
 import { FitnessGoals } from "./FitnessGoals"
 import { Confirmation } from "./Confirmation"
 import { useToast } from "@/hooks/use-toast"
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
     email: z.string().email("Adresse email invalide"),
@@ -24,13 +24,7 @@ const formSchema = z.object({
     age: z.number().min(18, "Vous devez avoir au moins 18 ans").max(120, "Âge invalide"),
     weight: z.number().min(30, "Poids minimum 30 kg").max(300, "Poids maximum 300 kg"),
     height: z.number().min(100, "Taille minimum 100 cm").max(250, "Taille maximum 250 cm"),
-    goal: z.enum(["Shred",
-        "Cut",
-        "Bulk",
-        "Strong",
-        "Fit",
-        "Power",
-        "Enduro"]),
+    goal: z.enum(["Shred", "Cut", "Bulk", "Strong", "Fit", "Power", "Enduro"]),
     level: z.enum(["beginner", "intermediate", "advanced"]),
     gender: z.enum(["man", "woman", "other"]),
 })
@@ -38,10 +32,11 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>
 
 export default function RegisterForm() {
-    const router = useRouter();
+    const router = useRouter()
     const [step, setStep] = useState(1)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const { toast } = useToast()
+
     const {
         register,
         handleSubmit,
@@ -49,7 +44,6 @@ export default function RegisterForm() {
         trigger,
         getValues,
         setValue,
-        watch,
     } = useForm<FormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -75,26 +69,22 @@ export default function RegisterForm() {
     const prevStep = () => setStep((prev) => Math.max(prev - 1, 1))
 
     const onSubmit: SubmitHandler<FormData> = async (data) => {
-        setIsSubmitting(true)
         try {
+            setIsSubmitting(true)
+
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/register`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
             })
 
-            if (!response.ok) {
-                throw new Error("Erreur lors de l'inscription")
-            }
+            if (!response.ok) throw new Error("Erreur lors de l'inscription")
 
             toast({
                 title: "Inscription réussie",
                 description: "Votre compte a été créé avec succès.",
             })
-            router.push("/login");
-
+            router.push("/login")
         } catch (error) {
             console.error("Erreur d'inscription:", error)
             toast({
@@ -117,7 +107,15 @@ export default function RegisterForm() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br p-4">
-            <Card className="w-full max-w-lg bg-white/80 backdrop-blur-sm shadow-xl">
+            <Card className="w-full max-w-lg bg-white/80 backdrop-blur-sm shadow-xl relative">
+                {/* Overlay de chargement plein écran de la carte */}
+                {isSubmitting && (
+                    <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-white/60 dark:bg-black/40 backdrop-blur-sm rounded-xl">
+                        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                        <p className="text-sm text-muted-foreground">Création du compte en cours…</p>
+                    </div>
+                )}
+
                 <CardHeader>
                     <CardTitle className="text-2xl font-bold text-center text-gray-800">Créer un compte</CardTitle>
                 </CardHeader>
@@ -145,28 +143,38 @@ export default function RegisterForm() {
                             <div className="h-1 w-full bg-gray-200 rounded-full" />
                         </div>
                     </div>
+
+                    {/* Désactive tous les champs pendant le submit */}
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                        {step === 1 && <PersonalInfo register={register} errors={errors} />}
-                        {step === 2 && <AccountDetails register={register} errors={errors} />}
-                        {step === 3 && <PhysicalInfo register={register} errors={errors} />}
-                        {step === 4 && <FitnessGoals register={register} errors={errors} setValue={setValue} />}
-                        {step === 5 && <Confirmation getValues={getValues} />}
+                        <fieldset disabled={isSubmitting} className="space-y-6">
+                            {step === 1 && <PersonalInfo register={register} errors={errors} />}
+                            {step === 2 && <AccountDetails register={register} errors={errors} />}
+                            {step === 3 && <PhysicalInfo register={register} errors={errors} />}
+                            {step === 4 && <FitnessGoals register={register} errors={errors} setValue={setValue} />}
+                            {step === 5 && <Confirmation getValues={getValues} />}
+                        </fieldset>
                     </form>
                 </CardContent>
                 <CardFooter className="flex justify-between">
                     {step > 1 && (
-                        <Button type="button" variant="outline" onClick={prevStep} className="flex items-center">
+                        <Button type="button" variant="outline" onClick={prevStep} className="flex items-center" disabled={isSubmitting}>
                             <ChevronLeft className="w-4 h-4 mr-2" /> Précédent
                         </Button>
                     )}
+
                     {step < 5 ? (
-                        <Button type="button" onClick={nextStep} className="ml-auto flex items-center">
+                        <Button type="button" onClick={nextStep} className="ml-auto flex items-center" disabled={isSubmitting}>
                             Suivant <ChevronRight className="w-4 h-4 ml-2" />
                         </Button>
                     ) : (
                         <Button type="submit" onClick={handleSubmit(onSubmit)} className="ml-auto" disabled={isSubmitting}>
-                            {isSubmitting ? "Inscription en cours..." : "S'inscrire"}
-
+                            {isSubmitting ? (
+                                <span className="inline-flex items-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin" /> Inscription en cours…
+                </span>
+                            ) : (
+                                "S'inscrire"
+                            )}
                         </Button>
                     )}
                 </CardFooter>
@@ -174,4 +182,3 @@ export default function RegisterForm() {
         </div>
     )
 }
-

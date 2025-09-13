@@ -14,21 +14,21 @@ import {
 } from "@/components/ui/chart"
 
 const chartData = [
-    { month: "January", desktop: 186, mobile: 80 },
-    { month: "February", desktop: 305, mobile: 200 },
-    { month: "March", desktop: 237, mobile: 120 },
-    { month: "April", desktop: 73, mobile: 190 },
-    { month: "May", desktop: 209, mobile: 130 },
-    { month: "June", desktop: 214, mobile: 140 },
+    { month: "Janvier", poids_kg: 70, seances: 12 },
+    { month: "Février", poids_kg: 71, seances: 14 },
+    { month: "Mars", poids_kg: 72, seances: 13 },
+    { month: "Avril", poids_kg: 72.5, seances: 15 },
+    { month: "Mai", poids_kg: 73, seances: 16 },
+    { month: "Juin", poids_kg: 73.5, seances: 14 },
 ]
 
 const chartConfig = {
-    desktop: {
-        label: "Desktop",
+    poids_kg: {
+        label: "Poids (kg)",
         color: "hsl(var(--chart-1))",
     },
-    mobile: {
-        label: "Mobile",
+    seances: {
+        label: "Séances par mois",
         color: "hsl(var(--chart-2))",
     },
 } satisfies ChartConfig
@@ -37,8 +37,8 @@ export function ChartBar() {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Bar Chart - Stacked + Legend</CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
+                <CardTitle>Évolution — Poids & Séances</CardTitle>
+                <CardDescription>Janvier — Juin</CardDescription>
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig}>
@@ -49,22 +49,23 @@ export function ChartBar() {
                             tickLine={false}
                             tickMargin={10}
                             axisLine={false}
-                            tickFormatter={(value) => value.slice(0, 3)}
+                            tickFormatter={(value) => String(value).slice(0, 3)}
                         />
                         <ChartTooltip content={<ChartTooltipContent hideLabel />} />
                         <ChartLegend content={<ChartLegendContent />} />
-                        <Bar dataKey="desktop" stackId="a" fill="var(--color-desktop)" radius={[0, 0, 4, 4]} />
-                        <Bar dataKey="mobile" stackId="a" fill="var(--color-mobile)" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="poids_kg" stackId="a" fill="var(--color-poids_kg)" radius={[0, 0, 4, 4]} />
+                        <Bar dataKey="seances" stackId="a" fill="var(--color-seances)" radius={[4, 4, 0, 0]} />
                     </BarChart>
                 </ChartContainer>
             </CardContent>
             <CardFooter className="flex-col items-start gap-2 text-sm">
                 <div className="flex gap-2 font-medium leading-none">
-                    Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+                    Progression régulière observée <TrendingUp className="h-4 w-4" />
                 </div>
-                <div className="leading-none text-muted-foreground">Showing total visitors for the last 6 months</div>
+                <div className="leading-none text-muted-foreground">
+                    Poids moyen et nombre de séances cumulés sur 6 mois
+                </div>
             </CardFooter>
         </Card>
     )
 }
-

@@ -74,7 +74,7 @@ export default function TopNav() {
                 <DropdownMenu>
                     <DropdownMenuTrigger className="focus:outline-none">
                         <Image
-                            src={johnDoe}
+                            src={"/avatar-logo.jpg"}
                             alt="User avatar"
                             width={28}
                             height={28}
@@ -89,9 +89,9 @@ export default function TopNav() {
                         {user ? (
                             <Profil
                                 name={`${user.firstname} ${user.lastname}`}
-                                role="Developer"
+                                role="Membre"
                                 avatarSrc={johnDoe.src}
-                                subscription="Pro"
+                                subscription="Gratuit"
                             />
                         ) : (
                             <p className="p-4 text-gray-500 dark:text-gray-400">
